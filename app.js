@@ -5,7 +5,7 @@ const path = require('path');
 const logger = require('morgan');
 const cors = require('cors');
 const router = require("./routes")
-const port = process.env.Port || 5000
+const port = process.env.Port || 6000
 
 const app = express();
 app.use(bodyParser.json());

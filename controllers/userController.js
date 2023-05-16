@@ -27,11 +27,11 @@ class UserController {
 
     async login(req, res, next) {
         try {
-            const {accessToken:tocken} =await UserService.loginUser(req.body);
+            const {accessToken:tocken} = await UserService.loginUser(req.body);
             await res.status(200).json({message:'ok',tocken});
         }
         catch(err) {
-            next(err)
+            res.send(err.message)
         }
     }
 

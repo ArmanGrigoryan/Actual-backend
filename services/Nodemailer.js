@@ -1,4 +1,5 @@
 const nodeMailer = require('nodemailer');
+const message = require("../utils/messages")
 
 class NodeMailer{
     constructor(){

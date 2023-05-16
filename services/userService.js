@@ -1,7 +1,9 @@
 const DBConn = require('../services/database.service');
 const bcrypt = require('bcrypt');
-const jwt = require('json-web-token');
 const uuid = require('uuid');
+const jwt = require('jsonwebtoken')
+const ApiError = require('../utils/error');
+const{jwtAuthentcation}= require('../middleware/index')
 
 class UserService {
     async createNewUser(body) {
@@ -46,12 +48,18 @@ class UserService {
 
     async loginUser(body) {
        const{email,password}=body;
-       console.log(email,password,1111111);
        const query = `
        SELECT * FROM Users WHERE email = ?
    `;
      const [[canditate]]=await DBConn.query(query,email);
-     console.log( canditate );
+     if(!canditate) throw ApiError.badRequest('logint sxal e axjik jan');
+     if(await bcrypt.compare(password,canditate.password)){
+        const{password,...user}=canditate
+        const accessToken = jwtAuthentcation(user)
+        return accessToken
+     }else{
+        throw ApiError.badRequest('parold sxal e varcd muce')
+     }
 
     }
 
