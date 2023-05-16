@@ -13,6 +13,11 @@ class ApiError extends Error{
     static notFound(){
         return new ApiError(404, "not found")
     }
+    static unauthorized(){
+        return new ApiError(404, "unauthorized")
+    }
+   
+   
 }
 
 module.exports = ApiError;
