@@ -1,9 +1,12 @@
-const DBConn = require('../services/database.service');
+const DB = require('../db/index');
+const Users = DB.users
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const jwt = require('jsonwebtoken')
 const ApiError = require('../utils/error');
-const{jwtAuthentcation}= require('../middleware/index')
+const{jwtAuthentcation}= require('../middleware/index');
+// const { now } = require('sequelize/types/utils');
+
 
 class UserService {
     async createNewUser(body) {
@@ -17,19 +20,32 @@ class UserService {
             } = body;
             const hashPass = await bcrypt.hash(password, 10);
             const unique = await uuid.v4();
-            const query = `
-                INSERT INTO Users(name, lastname, email, phone, password, activationCode)
-                VALUES (?, ?, ?, ?, ?, ?)
-            `;
-            await DBConn.query(query, [
-                name,
-                lastname,
-                email,
-                phone,
-                hashPass,
-                unique,
-            ]);
-
+            // const query = `
+            //     INSERT INTO Users(name, lastname, email, phone, password, activationCode)
+            //     VALUES (?, ?, ?, ?, ?, ?)
+            // `;
+            // await DBConn.query(query, [
+            //     name,
+            //     lastname,
+            //     email,
+            //     phone,
+            //     hashPass,
+            //     unique,
+            // ]);
+            console.log(Users);
+            await Users.create({
+                    
+                    name:"kokdi90",
+                    lastname:"kokdi90",
+                    email:"kokdi90@mail.ru",
+                    password:hashPass,
+                    activationCode:unique,
+                    phone:"kokdi90",
+                
+                   
+                    
+                   
+            })
             return { title: 'Sign up' };
         }
         catch(err) {
