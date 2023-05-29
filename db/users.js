@@ -1,8 +1,7 @@
 const Sequelize = require('sequelize')
 
 // const { type } = require('../validator/user')
-
-module.exports = function(sequelize){
+module.exports= function(sequelize){
     return sequelize.define('user',{
         id:{
             type:Sequelize.INTEGER,
@@ -13,22 +12,27 @@ module.exports = function(sequelize){
         },
         name:{
             type:Sequelize.STRING,
+            allowNull:false
            
         },
         lastname:{
             type:Sequelize.STRING,
-           
+            allowNull:false
         },
         email:{
             type:Sequelize.STRING,
+            allowNull:false,
+            unique: true,
+            isEmail: true,
              
         },
         password:{
             type:Sequelize.STRING,
+             allowNull:false
             
         },
         active:{
-            type:Sequelize.INTEGER,
+            type:Sequelize.TINYINT,
             defaultValue: 0,
             
         },
@@ -37,16 +41,19 @@ module.exports = function(sequelize){
            
         },
         creationDate:{
-            type:Sequelize.STRING,
-            defaultValue: Date,
+            type:Sequelize.DATE,
+            allowNull: false,
+            defaultValue: new Date()
+           
              
         },
         phone:{
             type:Sequelize.STRING,
-             
+            unique: true,
         },
 
-    }, )
+    });
+    
         
     
     

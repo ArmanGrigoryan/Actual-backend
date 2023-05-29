@@ -10,7 +10,7 @@ class UserController {
             });
         }
         catch(err) {
-            res.send(err.message)
+            res.status(400).json(err.message)
         }
     }
 

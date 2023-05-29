@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next)=>{
-  next(console.log(111));
+  next(console.log(555));
 });
 
 // app.use(function(err, req, res, next) {

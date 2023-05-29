@@ -32,24 +32,23 @@ class UserService {
             //     hashPass,
             //     unique,
             // ]);
-            console.log(Users);
-            await Users.create({
-                    
-                    name:"kokdi90",
-                    lastname:"kokdi90",
-                    email:"kokdi90@mail.ru",
+            let samson= await Users.create({
+                    name,
+                    lastname,
+                    email,
                     password:hashPass,
                     activationCode:unique,
-                    phone:"kokdi90",
-                
-                   
+                    phone,
+                    // active,
+                    // creationDate
                     
                    
             })
-            return { title: 'Sign up' };
+            throw ApiError.badRequest(' muce')
+            // return { title: 'Sign up' };
         }
         catch(err) {
-            return err.message
+           console.log(err);
         }
     }
 
@@ -64,10 +63,11 @@ class UserService {
 
     async loginUser(body) {
        const{email,password}=body;
-       const query = `
-       SELECT * FROM Users WHERE email = ?
-   `;
-     const [[canditate]]=await DBConn.query(query,email);
+//        const query = `
+//        SELECT * FROM Users WHERE email = ?
+//    `;
+//      const [[canditate]]=await DBConn.query(query,email);
+    
      if(!canditate) throw ApiError.badRequest('logint sxal e axjik jan');
      if(await bcrypt.compare(password,canditate.password)){
         const{password,...user}=canditate
