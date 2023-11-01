@@ -1,10 +1,9 @@
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize('Educavo','dev','dev123',{
-  dialect:'mysql',
+const sequelize = new Sequelize('actualtc_admin','root','root',{
+  dialect: 'mysql',
   host: 'localhost',
   port: 3306,
-
 })
 const Users= require('./users')(sequelize)
 
@@ -18,5 +17,4 @@ sequelize.authenticate().then(()=>{
 module.exports= {
     sequelize,
     users:Users
-
 }

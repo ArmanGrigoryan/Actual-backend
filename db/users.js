@@ -8,12 +8,10 @@ module.exports= function(sequelize){
             autoIncrement:true,
             primaryKey: true,
             allowNull:false
-    
         },
         name:{
             type:Sequelize.STRING,
             allowNull:false
-           
         },
         lastname:{
             type:Sequelize.STRING,
@@ -24,11 +22,10 @@ module.exports= function(sequelize){
             allowNull:false,
             unique: true,
             isEmail: true,
-             
         },
         password:{
             type:Sequelize.STRING,
-             allowNull:false
+            allowNull:false
             
         },
         active:{
@@ -38,23 +35,15 @@ module.exports= function(sequelize){
         },
         activationCode:{
             type:Sequelize.STRING,
-           
         },
         creationDate:{
             type:Sequelize.DATE,
             allowNull: false,
             defaultValue: new Date()
-           
-             
         },
         phone:{
             type:Sequelize.STRING,
             unique: true,
         },
-
     });
-    
-        
-    
-    
 }

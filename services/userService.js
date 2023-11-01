@@ -1,10 +1,10 @@
-const DB = require('../db/index');
-const Users = DB.users
+// const DB = require('../db/index');
+// const Users = DB.users
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const jwt = require('jsonwebtoken')
 const ApiError = require('../utils/error');
-const{jwtAuthentcation}= require('../middleware/index');
+const { jwtAuthentcation } = require('../middleware/index');
 // const { now } = require('sequelize/types/utils');
 
 
@@ -41,14 +41,12 @@ class UserService {
                     phone,
                     // active,
                     // creationDate
-                    
-                   
             })
             throw ApiError.badRequest(' muce')
             // return { title: 'Sign up' };
         }
         catch(err) {
-           console.log(err);
+            console.log(err);
         }
     }
 
@@ -62,7 +60,7 @@ class UserService {
     }
 
     async loginUser(body) {
-       const{email,password}=body;
+        const{email,password}=body;
 //        const query = `
 //        SELECT * FROM Users WHERE email = ?
 //    `;
