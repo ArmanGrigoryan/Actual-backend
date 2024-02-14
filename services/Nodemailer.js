@@ -5,6 +5,15 @@ let transporter;
 
 class NodeMailer{
     constructor() {
+        // transporter = nodeMailer.createTransport({
+        //     host: "live.smtp.mailtrap.io",
+        //     port: 587,
+        //     auth: {
+        //         user: "api",
+        //         pass: "f87c598699bbc2f426973cd8de19b3e1"
+        //     }
+        // });
+
         transporter = nodeMailer.createTransport({
             host: "sandbox.smtp.mailtrap.io",
             port: 2525,
@@ -13,18 +22,6 @@ class NodeMailer{
                 pass: "cab9a5b354de5f"
             }
         });
-
-        //   gmail
-        // transporter = nodeMailer.createTransport({
-        //     service: "gmail",
-        //     host: "smtp.gmail.com",
-        //     port: 587,
-        //     secure: false,
-        //     auth: {
-        //         user: "armangrig8@gmail.com",
-        //         pass: "llhz ymgv dtgy gpda",
-        //     },
-        // });
 
         transporter.verify(function(error, success) {
             if (error) {
@@ -48,28 +45,35 @@ class NodeMailer{
         try {
             const { filters } = req.body;
             const emailData = {
-                title: "The Voice Of HR (Up And Skilling)",
-                heading: "Ակտուալ իրադարձություն",
-                description: "Մասնակցեք, ձեռք բերեք գիտելիքներ",
-                detailedDescription: "Ակտուալը վերադառնում է նոր խորագրով. լինելու են զանազան իրադարձություններ, ելույթներ, կարծիքների բախումներ։ Տոմսեր ամրագրելու համար զանգահարեք (+374)44-30-30-28:",
-                date: "Նոյեմբերի 17, 19։00"
+                title: "",
+                heading: "Բաժանորդագրություն",
+                description: "Հետևեք մեր նորություններին, տեղեկացեք սպասվելիք դասընթացների և իվենթների մասին առաջինը։",
+                detailedDescription: "",
+                detailedDescription2: "Ստացեք OutSource֊In-House, ծանոթացեք առաջարկվող ծառայություններին։",
+                detailedDescription3: "Ակտուալը ներկայանում է նոր խորագրերով։ Մնացեք մեզ հետ, եղեք իրադարձություններին մասնակից։",
+                date: ""
             };
 
             const options = {
                 from: {
-                    address: 'actualhrarmenia@gmail.com', 
-                    name: 'Actual HR Agency', 
+                    address: 'support@actualhr.am', 
+                    name: 'Actual HR Partner', 
                 },
-                to: [`${filters.toEmail}`, `${filters.toEmail}`], 
-                subject: "Ակտուալ բաժանորդագրություն",
+                to: [`${filters.toEmail}`], 
+                subject: "Հետադարձ Կապ",
                 html: EmailTemplate(emailData),
             }
-        
+
             transporter.sendMail(options, (error, info) => {
-                if (error) {
-                    res.status(503).send(error);
-                } else {
-                    res.status(200).send('Email sent successfully');
+                try {
+                    if (error) {
+                        res.status(503).send(error);
+                    } else {
+                        res.status(200).send('Email sent successfully');
+                    }
+                }
+                catch (e) {
+                    console.log(e)
                 }
             });
         } catch (e) {
