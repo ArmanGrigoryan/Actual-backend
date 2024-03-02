@@ -5,21 +5,12 @@ let transporter;
 
 class NodeMailer{
     constructor() {
-        // transporter = nodeMailer.createTransport({
-        //     host: "live.smtp.mailtrap.io",
-        //     port: 587,
-        //     auth: {
-        //         user: "api",
-        //         pass: "f87c598699bbc2f426973cd8de19b3e1"
-        //     }
-        // });
-
         transporter = nodeMailer.createTransport({
-            host: "sandbox.smtp.mailtrap.io",
-            port: 2525,
+            host: "smtp-relay.brevo.com",
+            port: 587,
             auth: {
-                user: "58fac8ad94c99e",
-                pass: "cab9a5b354de5f"
+                user: "armangrig8@gmail.com",
+                pass: "acY3BDR7HEnm1x8q"
             }
         });
 
@@ -34,7 +25,7 @@ class NodeMailer{
 
     async sendMail(mailDetails, callback) {
         try {
-            const info = await transporter.sendMail(mailDetails)
+            const info = await transporter.sendMail(mailDetails);
             callback(info);
         } catch (error) {
             console.log(error);
@@ -56,7 +47,7 @@ class NodeMailer{
 
             const options = {
                 from: {
-                    address: 'support@actualhr.am', 
+                    address: 'info@actualhr.am', 
                     name: 'Actual HR Partner', 
                 },
                 to: [`${filters.toEmail}`], 

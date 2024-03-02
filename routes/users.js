@@ -1,10 +1,9 @@
 const router = require('express').Router();
 const UserController = require('../controllers/userController');
 const userSchema = require('../validator/user');
-const validador = require('../middleware/index');
+const validator = require('../middleware/index');
 
-
-router.post('/register', validador.validate(userSchema), UserController.createUser);
+router.post('/register', validator.validate(userSchema), UserController.createUser);
 router.get('/verification/:secret', UserController.verifyUser);   /// ? post
 router.post('/login', UserController.login);
 router.post('/logout', UserController.logout);
