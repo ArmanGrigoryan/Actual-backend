@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon app"
+    "start": "nodemon app",
+    "start:prod": "node app"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
